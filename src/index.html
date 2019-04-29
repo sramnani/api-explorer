@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<div ng-controller="MyCtrl" class="container my-ctrl">
+    <div swagger-ui title="Add new user" url="https://jsonplaceholder.typicode.com/users" method="POST"
+         body="[
+            {
+                name: 'email',
+                type: 'email',
+                max: 24,
+                min: 3
+            },
+            {
+               name: 'full-name',
+               type: 'text',
+               placeholder: 'John Doe',
+               required: true
+            },
+            {
+              name: 'phone',
+              type: 'tel',
+              pattern: '[0-9]{3}-[0-9]{3}-[0-9]{4}'
+            }]">
+
+    </div>
+</div>
+<!-- dependencies -->
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="scripts/swagger-ui.js"></script>
+<script src="scripts/controllers/swagger-ui-controller.js"></script>
+<script src="scripts/services/swagger-service.js"></script>
+<script type="text/javascript">
+    angular
+        .module('myApp', ['swaggerUi'])
+        .controller('MyCtrl', function ($scope) {
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<link rel="stylesheet" type="text/css" href="css/swagger-ui.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      crossorigin="anonymous">
+<div class="spinner" ng-show="loading">
+    <img src="http://i49.tinypic.com/j5z8mb.gif" alt="Yükleniyor..."/>
+</div>
+<div class="swagger-ui">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>{{title}}</h3>
+            <h4 ng-bind="method" class="method"></h4>
+            <div class="section">
+            <h4>Base URL</h4>
+            <pre>{{url}}</pre>
+            </div>
+            <div class="body">
+             <h4>Body</h4>
+            <ng-form name="myForm" ng-disabled="!enableForm">
+                <div class="login-container">
+                    <div class="row" ng-repeat="dataObj in dataObjs track by dataObj.name">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-capitalize label-exp" ng-bind="standardise(dataObj.name)"></label><span ng-if="dataObj.required === true"
+                                                                                          class="field-required">*</span>
+                                <input ng-model="request.name" id="23" ng-required="{{dataObj.required}}"
+                                       type="{{dataObj.type}}" class="form-control" placeholder="{{dataObj.placeholder}}"
+                                       ng-disabled="method !== 'POST' && method !== 'PUT'" name="{{dataObj.name}}"
+                                       ng-maxlength="{{dataObj.max}}" ng-pattern="'{{dataObj.pattern}}'">
+                                <p ng-show="(myForm['{{dataObj.name}}']).$error.required && (myForm['{{dataObj.name}}']).$touched"
+                                   class="text-danger">Field {{dataObj.name}} is required</p>
+                                <p ng-show="((myForm['{{dataObj.name}}']).$invalid) && (!(myForm['{{dataObj.name}}']).$error.required) && ((myForm['{{dataObj.name}}']).$touched)"
+                                   class="text-danger">Field {{dataObj.name}} is not valid</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button ng-if="enableForm" ng-click="submitReq(request)" ng-disabled="myForm.$invalid"
+                                        class="btn btn-success pull-left">Send Request
+                                </button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button ng-if="!enableForm" ng-click=" submitReq(request)"
+                                    class="btn btn-success pull-left">Send Request
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+        <div class="operation" ng-if="result || error">
+            <div class="content">
+                <div class="section">
+                <h4 class="section">Response</h4>
+                <div class="response-item">Body</div>
+                <pre class="explorer-body" ng-if="response">{{response}}</pre>
+                </div>
+                <div class="section">
+                <div class="response-item">Status</div>
+                <pre ng-if="result.status">{{result.status}}</pre>
+                <pre ng-if="error.status" class="explorer-status">{{error.status}}</pre>
+                </div>
+                <div class="section">
+                <div class="response-item">Header</div>
+                <pre ng-if="result" class="explorer-headers">{{headers}}</pre>
+                <pre ng-if="error" class="explorer-headers">{{error.config.headers}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
