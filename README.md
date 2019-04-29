@@ -1,10 +1,10 @@
 # api-explorer
 Custom component in angular for api-explorer
-To install clone the repo
-Run npm install inside the dir api-explorer
-Run grunt dev:server
-Application will launch on localhost:9002
-Directive is currently imported in index.html.To call the directive in another angular application import it as below
+- To install clone the repo
+- Run npm install inside the dir api-explorer
+- Run grunt dev:server
+- Application will launch on localhost:9002
+- Directive is currently imported in index.html.To call the directive in another angular application import it as below
 ```
 angular
         .module('myApp', ['swaggerUi'])
